@@ -1,0 +1,41 @@
+class GfG {
+    public Stack<Integer> sort(Stack<Integer> s) {
+        // add code here.
+        
+           if(s.isEmpty()){
+            return s;
+            }
+            int temp=s.pop();
+             sort(s);
+             // down to one element  from s.isEMpty it will return empty stack to stack
+             // with one element then two element
+             // sort Stack will basically tries to sort
+             // suppose one elemt simply push
+             // wo element pop until number is smaller  or stack is empty then push the temp 
+            //  then push the just popped element 
+             sortStack(s,temp);
+             return s;
+    }
+    public void sortStack(Stack<Integer> s,int temp){
+        
+        
+        // pop until number temp is not larger
+        //base case either empty and number temp  now bigger than all elements of stack 
+        // stack will be decreasing order  5 4 3 2 1 
+        if(s.isEmpty()){
+            s.push(temp);
+            return ;
+        }
+        int tempElement=s.pop();
+        if(temp>tempElement){
+            s.push(tempElement);
+            s.push(temp);
+            return ;
+        }
+        sortStack(s,temp);
+        s.push(tempElement);
+        
+        
+        
+    }
+}
