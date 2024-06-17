@@ -24,10 +24,10 @@ class Solution {
         
     }
 
-    public List<Integer> getRightSide(TreeNode node,int level,List<Integer> result){
+    public void getRightSide(TreeNode node,int level,List<Integer> result){
         
         if(node ==null){
-            return result;
+            return;
         }
         //check if level equals to list size insert it 
         if(result.size()==level){
@@ -35,6 +35,5 @@ class Solution {
         }
         getRightSide(node.right,level+1,result);
         getRightSide(node.left,level+1,result);
-        return result;
     }  
 }
