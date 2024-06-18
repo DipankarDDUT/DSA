@@ -39,32 +39,26 @@ class Solution {
     // }
 
 
-    //using 1 stack 
+    //using 2 stack 
     public List<Integer> postorderTraversal(TreeNode root) {
         Stack<TreeNode> st=new Stack<>();
-        List<Integer> ansList=new ArrayList<>();
+        Stack<Integer> stRoot=new Stack<>();
+       
         st.push(root);
-        postOrderTraverse(ansList,st);
-        // answer will come in reverse order if used two stack then it would come in correct order
-        Collections.reverse(ansList); 
-        return ansList;
-
-    }
-     public void postOrderTraverse(List<Integer> ansList,Stack<TreeNode> st){
-
-            if(st.isEmpty()){
-                return;
-            }
-
+        // postOrderTraverse(ansList,st);
+        while(!st.isEmpty()){
             TreeNode temp=st.pop();
             //whenever pops add to ansList
             if(temp!=null)
-            ansList.add(temp.val);
+            stRoot.push(temp.val);
             if(temp!=null && temp.left!=null)
             st.push(temp.left);
             if(temp!=null && temp.right!=null)
             st.push(temp.right);
-            postOrderTraverse(ansList,st);
+        }
+         List<Integer> ansList=new ArrayList<>(stRoot);
+         Collections.reverse(ansList);
+        return ansList;
 
-     }
+    }
 }
