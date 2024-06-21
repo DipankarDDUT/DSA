@@ -19,7 +19,10 @@ class MyStack {
     public int pop() {
         // two queue requires but ArrayDeque provides method that can 
         //be done using single queue itself;
+        // if not then push all from queue1 to queue2 until curSize==1; 
+        // whatever left pop it and again transfer back to queue1 increasing the currSize  as  well
         if(queue1.size()>0){
+            // casting is required as Queue doesnot provide this methods 
             int temp= ((ArrayDeque<Integer>) queue1).removeLast();
             currSize--;
             return temp;
