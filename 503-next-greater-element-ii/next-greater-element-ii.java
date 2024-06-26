@@ -20,14 +20,7 @@ class Solution {
             }else if (st.isEmpty() && i<nums.length ){
                 result[index]=-1;
             }
-            // if(!st.isEmpty()){
-            // if(st.peek()<nums[index]){
             st.push(nums[index]);
-            // }
-            // }else{
-            //     st.push(nums[index]);
-            // }
-
         }
 
         return result;
