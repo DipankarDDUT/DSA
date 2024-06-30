@@ -35,7 +35,9 @@ class Solution {
 
         // return result;
 
-            // optimal 
+            // Best Approach , next we will see optimal 
+            // time complexity is O(n) but space complexity incresed
+            //  form O(1) to O(2n)
             // we will get rid of inner loop to calculate left max and right max 
             // use prefix max and suffix max
             int max=0;
