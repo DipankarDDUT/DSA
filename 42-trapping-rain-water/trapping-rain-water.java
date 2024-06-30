@@ -40,34 +40,64 @@ class Solution {
             //  form O(1) to O(2n)
             // we will get rid of inner loop to calculate left max and right max 
             // use prefix max and suffix max
-            int max=0;
-            int[] prefix=new int[height.length];
-            int[] suffix=new int[height.length];
-            for(int i=0;i<height.length;i++){
-                if(height[i]>max){
-                    max=height[i];
-                }
-                prefix[i]=max;
-            }
-            max=0;
-               for(int i=height.length-1;i>=0;i--){
-                if(height[i]>max){
-                    max=height[i];
-                }
-                suffix[i]=max;
-            }
-           int result=0;
-        for(int i=1;i<height.length-1;i++){
+        //     int max=0;
+        //     int[] prefix=new int[height.length];
+        //     int[] suffix=new int[height.length];
+        //     for(int i=0;i<height.length;i++){
+        //         if(height[i]>max){
+        //             max=height[i];
+        //         }
+        //         prefix[i]=max;
+        //     }
+        //     max=0;
+        //        for(int i=height.length-1;i>=0;i--){
+        //         if(height[i]>max){
+        //             max=height[i];
+        //         }
+        //         suffix[i]=max;
+        //     }
+        //    int result=0;
+        // for(int i=1;i<height.length-1;i++){
         
-            int leftMostHeight=prefix[i];
-            int rightMostHeight=suffix[i];
-            int tempHeight=Math.min(leftMostHeight,rightMostHeight)-height[i];
-            if(tempHeight>0){
-                result+=tempHeight;
+        //     int leftMostHeight=prefix[i];
+        //     int rightMostHeight=suffix[i];
+        //     int tempHeight=Math.min(leftMostHeight,rightMostHeight)-height[i];
+        //     if(tempHeight>0){
+        //         result+=tempHeight;
+        //     }
+        // }
+
+        // return result;
+
+
+        // optimal with O(n) and O(1)
+        int leftmost=0;  // leftmost highest value
+        int rightmost=0;
+        int l=0;
+        int r=height.length-1;
+        int result=0;
+        while(l<=r){
+            if(height[l]<=height[r]){
+                // left is smaller
+                if(leftmost<height[l]){
+                   leftmost=height[l];
+                }else{
+                    result=result+leftmost-height[l];
+                    
+                }
+                l++;
+            }else{
+                // right is smaller
+                  if(rightmost<height[r]){
+                  
+                    rightmost=height[r];
+                }else{
+                    result=result+rightmost-height[r];
+                }
+                r--;;
             }
         }
 
         return result;
-
     }
 }
