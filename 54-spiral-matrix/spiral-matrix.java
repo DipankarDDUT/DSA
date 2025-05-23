@@ -14,7 +14,6 @@ class Solution {
                 // ----->
                 
                 result.add(matrix[m][n]);
-                System.out.println(matrix[m][n]);
                 
                 n++;
                 i++;
@@ -30,7 +29,6 @@ class Solution {
                 // |
 
                 result.add(matrix[m][n]);
-                System.out.println(matrix[m][n]);
 
                 i++;
                 m++;
@@ -42,7 +40,6 @@ class Solution {
           n--;
             while(n>=0+start){
                 result.add(matrix[m][n]);
-                System.out.println(matrix[m][n]);
 
                 i++;
                 n--;
@@ -57,7 +54,6 @@ class Solution {
 
                 // >= equal not use last number already added
                 result.add(matrix[m][n]);
-                System.out.println(matrix[m][n]);
 
                 m--;
                 i++;
