@@ -2,34 +2,20 @@ class Solution {
     public int strStr(String haystack, String needle) {
         
 
-        int i=0;
-        int j=0;
-        if(haystack.length()<needle.length()){
+        int m=haystack.length();
+        int n=needle.length();
+        if(n>m){
             return -1;
         }
-        while(i<haystack.length()){
-
-                if(needle.charAt(j)==haystack.charAt(i)){
-                    int result=i;
-                    int k=i;
-                while(j<needle.length() && k<haystack.length() && needle.charAt(j)==haystack.charAt(k)){
-                    System.out.print(haystack.charAt(k));
+        if(n==0) return -1;
+        for(int i=0;i<=m-n;i++){
+                int j=0;
+                while(j<n && needle.charAt(j)==haystack.charAt(i+j)){
                     j++;
-                    k++;
                 }
-                if(j==needle.length()){
-                    System.out.println();
-                    return result;
-                }else{
-                    System.out.println();
-                    j=0;
+                if(j==n){
+                    return i;
                 }
-                    i++;
-                }else{
-                    i++;
-                }
-
-            
         }
 
         return -1;
