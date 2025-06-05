@@ -1,5 +1,7 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
+
+        // space n and time nlogn
         int[] temp=Arrays.copyOf(nums,nums.length);
         Arrays.sort(nums);
         int i=0;
