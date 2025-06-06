@@ -12,14 +12,6 @@ class Solution {
             }
         }
 
-        // + 1 checking is done last element will not be checked 
-
-        // as two elements alwasy check have to check the last elment whether unique or not
-        // if(nums[count]!=nums[nums.length-1] && count<nums.length+1){
-        //     nums[count]=nums[nums.length-1]; 
-        //     count++;
-        // }
-
         return count;
     }
 }
