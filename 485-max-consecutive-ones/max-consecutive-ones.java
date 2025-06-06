@@ -5,21 +5,15 @@ class Solution {
         int count=0;
         for(int i=0;i<nums.length;i++){
               if(nums[i]!=1){
-                if(count>longest){
-                    longest=count;
-                }
+               longest=Math.max(longest,count);
                 count=0;
               } else{
                 count++;
               } 
         }
 
-        if(count!=0){
             // for last cosecutive 1s
-               if(count>longest){
-                    longest=count;
-                }
-        }
+          longest=Math.max(longest,count);
 
         return longest;
     }
