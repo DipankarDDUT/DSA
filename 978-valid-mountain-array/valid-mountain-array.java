@@ -4,7 +4,7 @@ class Solution {
 
         boolean increasing=false;
         boolean decreasing=false;
-        if(arr.length<2){
+        if(arr.length<3){
             return false;
         }
         
@@ -29,6 +29,6 @@ class Solution {
         }
 
         // check always incrasing no decrease
-        return decreasing?true:false;
+        return decreasing;
     }
 }
