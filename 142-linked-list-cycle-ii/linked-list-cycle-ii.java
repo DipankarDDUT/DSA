@@ -33,7 +33,6 @@ public class Solution {
          }
 
          slow=head;
-         System.out.println(fast.val);
          while(slow!=null){
             if(fast==slow){
                 return slow;
