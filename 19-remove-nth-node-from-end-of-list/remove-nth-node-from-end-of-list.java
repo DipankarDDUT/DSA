@@ -35,12 +35,6 @@ class Solution {
             fast=fast.next;
             slow=slow.next;
         }
-        System.out.println(slow.val);
-        // if(slow==head){
-        //      head=head.next;
-        //      return head;
-          
-        // }
         slow.next=slow.next.next;
         return head;
 
