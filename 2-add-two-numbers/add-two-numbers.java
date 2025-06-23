@@ -41,15 +41,9 @@ class Solution {
     }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         
-        // ListNode revl1=reverseList(l1);
-        // printList(revl1);
-        // ListNode revl2=reverseList(l2);
-        // printList(revl2);
         
          ListNode revl1=l1;
-        // printList(revl1);
          ListNode revl2=l2;
-        // printList(revl2);
 
         ListNode result=null;
         ListNode rCur=null;
@@ -105,14 +99,12 @@ class Solution {
               revl2=revl2.next;
 
         }
-        printList(result);
         if(carry>0){
              ListNode newNode=new ListNode(1);
               rCur.next=newNode;
               rCur=newNode;
         }
 
-        // result=reverseList(result);
         return result;
     }
 }
