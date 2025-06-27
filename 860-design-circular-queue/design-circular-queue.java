@@ -33,6 +33,12 @@ class MyCircularQueue {
         if(isEmpty()){
             return false;
         }
+        if (head == tail) {
+            head = -1;
+            tail = -1;
+            size=0;
+            return true;
+        }
         head=(head+1)%queue.length;
         size--;
         return true;
