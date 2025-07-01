@@ -9,14 +9,8 @@ class MinStack {
     
     public void push(int val) {
        stack.add(val);
-       if(minStack.isEmpty()){
+       if(minStack.isEmpty()||minStack.get(minStack.size()-1)>=val){
         minStack.add(val);
-       }else{
-        if(minStack.get(minStack.size()-1)<=val){
-            minStack.add(minStack.get(minStack.size()-1));
-        }else{
-          minStack.add(val);
-        }
        }
 
     }
@@ -25,8 +19,10 @@ class MinStack {
          if(stack.isEmpty()){
             return;
         }
-        stack.remove(stack.size()-1);
-        minStack.remove(minStack.size()-1);
+        int top=stack.remove(stack.size()-1);
+        if(top== minStack.get(minStack.size()-1)){
+          minStack.remove(minStack.size()-1);
+        }
 
     }
     
