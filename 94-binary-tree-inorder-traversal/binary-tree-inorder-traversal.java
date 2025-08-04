@@ -13,26 +13,22 @@
  *     }
  * }
  */
+
+
 class Solution {
-        
-         public List<Integer> inorderTraversal(TreeNode root) {
+    public void inorder(TreeNode root,List<Integer> result){
 
         if(root==null){
-            return new  ArrayList<Integer>();
+            return;
         }
-        List<Integer> ansList=new ArrayList<>();
-        inorderTraver(root,ansList);
-        return ansList;
 
+        inorder(root.left,result);
+        result.add(root.val);
+        inorder(root.right,result);
     }
-    public void inorderTraver(TreeNode root,List<Integer> ansList){
-         if(root==null){
-            return ;
-        }
-       
-        inorderTraver(root.left,ansList);
-         ansList.add(root.val);
-        inorderTraver(root.right,ansList);
-
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result=new ArrayList<>();
+        inorder(root,result);
+        return result;
     }
 }
