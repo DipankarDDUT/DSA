@@ -2,7 +2,7 @@ class Solution {
     public boolean isAnagram(String s, String t) {
         
         int[] arrayMap=new int[26];
-        if(s.length()!=t.length() || s.length()<1){
+        if(s.length()!=t.length()){
             return false;
         }
 
