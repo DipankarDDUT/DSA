@@ -17,7 +17,13 @@ class Solution {
         if(n%2==0){
             x=x * x;
             n= n/2;
+            return pow(x,n);
         }
-        return x * pow(x,n-1);
+        // for odd is straightforward n-1 
+        // for even how its working 
+        // simple we have taken expont 2 from power and then put to base so x * x
+        // so n /2 but next call whatever n was there that has to be get subtracted 
+		     // by -1 
+       return x * pow(x,n-1);
     }
 }
