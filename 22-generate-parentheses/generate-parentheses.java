@@ -1,8 +1,8 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> result=new ArrayList<>();
-        String s="(";
-        generate(n,s,1,0,result);
+        String s="";
+        generate(n,s,0,0,result);
         return result;
     }
 
