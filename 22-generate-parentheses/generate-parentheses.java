@@ -13,7 +13,7 @@ class Solution {
             return;
         }
 
-        if(open>n || close>n){
+        if(open>n){
             // as parenthesis need to be balanced
             // as open crossed the midway
             return ;
