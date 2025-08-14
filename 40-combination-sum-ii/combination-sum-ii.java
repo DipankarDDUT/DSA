@@ -10,9 +10,7 @@ class Solution {
 
   public void getCombination(
       int[] candidates, int index, int target, List<Integer> tempAns, List<List<Integer>> result) {
-    if (target < 0) {
-      return;
-    }
+  
     if (target == 0) {
       // target reduced to 0
       // we can reduce the primitive as scope is fiunction
@@ -26,11 +24,10 @@ class Solution {
       result.add(new ArrayList<>(tempAns));
       return;
     }
-
-    if (index >= candidates.length) {
-      // if index cross the length
+    if (target < 0||index >= candidates.length) {
       return;
     }
+  
 
     int nextIndex = index + 1;
     while (nextIndex < candidates.length && candidates[index] == candidates[nextIndex]) {
