@@ -1,35 +1,45 @@
 class Solution {
     public int thirdMax(int[] nums) {
-        int max=Integer.MIN_VALUE;
-        int secMax=Integer.MIN_VALUE;
-        if(nums.length==1){
-            return nums[0];
-        }
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]>max && nums[i]>secMax){
-                secMax=max;
-                max=nums[i];
-            }else if(nums[i]>secMax && nums[i]<max){
-                secMax=nums[i];
+
+        //brute is sort the array 
+        // then get the rightmose index 
+        // time O(nlogn)
+
+        // Optimal is O(n)
+
+        // let's find the second largest first 
+        int n = nums.length;
+                // input 1 2 -2147483648
+        // its actual MIN_VALUE not sentinel 
+        // then we have to take long instead of int
+        // int firstL = Integer.MIN_VALUE, secondL = Integer.MIN_VALUE, thirdL = Integer.MIN_VALUE;
+             long firstL = Long.MIN_VALUE, secondL = Long.MIN_VALUE, thirdL = Long.MIN_VALUE;
+        // firstL>secondL>thirdL
+        // so first assigment of condition value to firstL then secondL then thirdL
+        // important for same values in array 
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > firstL && nums[i] > secondL && nums[i] > thirdL) {
+                thirdL = secondL;
+                secondL = firstL;
+                firstL = nums[i];
+            } else if (nums[i] < firstL && nums[i] > secondL && nums[i] > thirdL) {
+                thirdL = secondL;
+                secondL = nums[i];
+
+            } else if (nums[i] > thirdL && nums[i] < secondL && nums[i] < firstL) {
+           
+                thirdL = nums[i];
             }
         }
-      
-        int thirdMax=Integer.MIN_VALUE;
-        boolean assigned=false;
-         System.out.println(thirdMax);
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]>=thirdMax && nums[i]!=max && nums[i]!=secMax){
-                thirdMax=nums[i];
-                assigned=true;
-            }
+
+        // now suppose indeed 
+
+        //if no third largest exist then the first largest element should be returned
+        // now as integer value input is handled also
+        if(thirdL==Long.MIN_VALUE){
+            return (int)firstL;
         }
 
-
-        if(!assigned){
-            return max;
-        }
-        return thirdMax;
-
-
+        return (int)thirdL;
     }
 }
