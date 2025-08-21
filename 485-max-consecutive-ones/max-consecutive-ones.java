@@ -8,9 +8,7 @@ class Solution {
             if(nums[i]==1){
                 cur++;
             }else{
-                if(cur>max_ones){
-                    max_ones=cur;
-                }
+                max_ones=Math.max(cur,max_ones);
                 // whatever either bigger or not 0 means cur get reset
                 cur=0;
 
