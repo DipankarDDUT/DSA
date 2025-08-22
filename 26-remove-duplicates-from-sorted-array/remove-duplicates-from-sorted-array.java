@@ -1,48 +1,31 @@
 class Solution {
     public int removeDuplicates(int[] nums) {
-        int n = nums.length;
-        int i=0;
-        for(int j=1;j<n;j++){
-            if(nums[j]!=nums[i]){
-                i++;
-                nums[i]=nums[j];
+        
+
+        if(nums.length==0) return 0;
+        // check the next index if not same increment the  index 
+        // if not keep the index there once got not same element , increment 
+        // the index 
+        int index=0;  // which in turn count of unique elements
+        for(int i=1;i<nums.length;i++){
+            if(nums[index]!=nums[i]){
+                // not equal
+                //to avoid same elements swap
+                if(index+1!=i){
+                    // swap logic not required
+                    // we are not bothered about last elements
+                    // int temp=nums[index+1];
+                    // nums[index+1]=nums[i];
+                    // nums[i]=temp;
+                    nums[index+1]=nums[i];
+                }
+                index++;
             }
         }
 
-        return i+1;
+        // as index 0 based but count 1 based
+        // even all same then 1 is still unique
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // int i=0;
-        // int n=nums.length;
-        // for(int j=0;j<n;j++){
-        //     if(nums[j]!=nums[i]){
-        //     nums[i+1]=nums[j];
-        //     i++;
-        // }}
-        // return i+1;
+        return index+1;
     }
-    
 }
