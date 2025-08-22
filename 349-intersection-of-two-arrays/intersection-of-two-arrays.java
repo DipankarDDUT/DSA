@@ -10,8 +10,10 @@ class Solution {
   public int[] intersection(int[] nums1, int[] nums2) {
 
     ArrayList<Integer> result = new ArrayList<>();
+	
     Arrays.sort(nums1);
     Arrays.sort(nums2);
+		// if array input not sorted then sort the inputs
     int index1 = 0;
     int index2 = 0;
     int length1 = nums1.length;
