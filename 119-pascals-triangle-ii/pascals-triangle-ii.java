@@ -1,24 +1,30 @@
 class Solution {
+    public int findElement(int k, int n) {
 
-    public int findPascalValue(int n,int r){
-        r=r>n-r?r:n-r;
-        int row=n;
-        long mul=1;
-        for(int i=1;i<=r;i++){
-            mul*=row;
-            mul/=i;
-            row--;
+        // n=n-1; // making n n-1
+        // r already -1 as iteratio started from 0
+        k = Math.min(n - k, k);
+        long result = 1;
+        for (int i = 0; i < k; i++) {
+            result *= n - i;
+            result /= (i + 1);
         }
 
-        return (int)mul;
+        return (int)result;
+
     }
+
     public List<Integer> getRow(int rowIndex) {
-        
-        List<Integer> result=new ArrayList<>();
-        result.add(1);
-        for(int i=1;i<=rowIndex;i++){
-            int temp=findPascalValue(rowIndex,i);
-            result.add(temp);
+        int r = rowIndex;
+        List<Integer> result = new ArrayList<>();
+        // iterating for the whole row col =1 col =2 ...
+        // as 0 indexed 
+        for (int i = 0; i <=r; i++) {
+            if (i == 0 || i == r) {
+                result.add(1);
+            } else {
+                result.add(findElement(i, r));
+            }
         }
 
         return result;
