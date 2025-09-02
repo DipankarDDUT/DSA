@@ -16,15 +16,11 @@ class Solution {
                     int sum=nums[i]+nums[left]+nums[right];
                     
                     if(sum>0){
-                        while(right>left && nums[right]==nums[right-1]){
-                            right--;
-                        }
+                    
                         right--;
 
                     }else if(sum<0){
-                        while(left<right && nums[left]==nums[left+1]){
-                            left++;
-                        }
+                 
                         left++;
 
                     }else{
