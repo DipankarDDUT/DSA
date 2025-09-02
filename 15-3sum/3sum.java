@@ -4,28 +4,45 @@ class Solution {
         // insertion order mismatch duplication also not 
         // possible like -1 -1 0 and 0 -1 -1 if not sorted then thi it
         // woulb be allowed 
-        Set<List<Integer>> result = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
         for (int i = 0; i < nums.length; i++) {
-            HashMap<Integer, Integer> preMap = new HashMap<>();
-            for (int j = i+1; j < nums.length; j++) {
-                // i != j j!=i
-                if (i == j) {
-                    continue;
-                }
-                int sum = -1 * (nums[i] + nums[j]);
-                if (preMap.containsKey(sum)) {
-                    int index = preMap.get(sum);
-                    if (index != i && index != j) {
-                        result.add(Arrays.asList(nums[i], nums[j], nums[index]));
-                    }
-                } else {
-                    preMap.put(nums[j], j);
-                }
-
+            int left=i+1;
+            int right=nums.length-1;
+            if(i>0 && nums[i]==nums[i-1]){
+                continue; // to avoid duplicated 
             }
+            while(left<right){
+                    int sum=nums[i]+nums[left]+nums[right];
+                    
+                    if(sum>0){
+                        while(right>left && nums[right]==nums[right-1]){
+                            right--;
+                        }
+                        right--;
+
+                    }else if(sum<0){
+                        while(left<right && nums[left]==nums[left+1]){
+                            left++;
+                        }
+                        left++;
+
+                    }else{
+                        result.add(Arrays.asList(nums[i],nums[left],nums[right]));
+                       
+                           while(left<right && nums[left]==nums[left+1]){
+                            left++;
+                        }
+                          while(right>left && nums[right]==nums[right-1]){
+                            right--;
+                        }
+                         left++;
+                        right--;
+                    }
+            }
+
         }
 
-        return new ArrayList<>(result);
+        return result;
     }
 }
