@@ -1,11 +1,15 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        // as two pointer approach not used duplicates can be here 
+        // set is used to avoid the duplicates as sorting is done
+        // insertion order mismatch duplication also not 
+        // possible like -1 -1 0 and 0 -1 -1 if not sorted then thi it
+        // woulb be allowed 
         Set<List<Integer>> result = new HashSet<>();
         Arrays.sort(nums);
         for (int i = 0; i < nums.length; i++) {
             HashMap<Integer, Integer> preMap = new HashMap<>();
             for (int j = i+1; j < nums.length; j++) {
+                // i != j j!=i
                 if (i == j) {
                     continue;
                 }
