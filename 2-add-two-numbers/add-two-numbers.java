@@ -9,102 +9,69 @@
  * }
  */
 class Solution {
-    private void printList(ListNode head){
+    public ListNode reverseLinkedList(ListNode head){
+            if(head==null||head.next==null){
+                return head;
+            }
+            ListNode cur=head.next;
+            ListNode prev=head;
+            prev.next=null;
+            while(cur!=null){
+                ListNode next=cur.next;
+                cur.next=prev;
+                prev=cur;
+                cur=next;
+            }
 
-        ListNode temp=head;
-           while(temp!=null){
-            System.out.print(temp.val+"->");
-            temp=temp.next;
-        }
-            System.out.println();
-
-    }
-    private ListNode reverseList(ListNode head){
-
-        if(head==null){
-            return null;
-        }
-        if(head.next==null){
-            return head;
-        }
-        ListNode prev=null;
-        ListNode temp=head;
-        while(temp!=null){
-            ListNode next=temp.next;
-            temp.next=prev;
-            prev=temp;
-            temp=next;
-        }
-
-        return prev;
+            return prev;
 
     }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         
-        
-         ListNode revl1=l1;
-         ListNode revl2=l2;
-
-        ListNode result=null;
-        ListNode rCur=null;
-
-        // now addition 
+        // ListNode h1=reverseLinkedList(l1);
+        // ListNode h2=reverseLinkedList(l2);
+        ListNode result;
         int carry=0;
-        while(revl1!=null && revl2!=null){
-            int sum=carry+revl1.val+revl2.val;
-            if(sum>=10){
-                carry=1;
+        ListNode cur=null;
+        ListNode head=null;
+        while(l1!=null || l2!=null){
+            int sum=0;
+            sum+=carry;
+            if(l1!=null){
+                sum+=l1.val;
+                l1=l1.next;
             }
-            else{
-                carry=0;
+            if(l2!=null){
+                sum+=l2.val;
+                l2=l2.next;
             }
+            carry=sum>9?1:0;
             sum=sum%10;
             ListNode newNode=new ListNode(sum);
-            if(result==null){
-                result=newNode;
-                rCur=result;
+            if(cur==null){
+                cur=newNode;
+                head=newNode;
             }else{
-                rCur.next=newNode;
-                rCur=newNode;
+                cur.next=newNode;
+                cur=newNode;
             }
-            revl1=revl1.next;
-            revl2=revl2.next;
-        }
-
-        while(revl1!=null){
-           int sum=carry+revl1.val;
-           if(sum>=10){
-                carry=1;
-            }else{
-                carry=0;
-            }
-            sum=sum%10;
-             ListNode newNode=new ListNode(sum);
-              rCur.next=newNode;
-              rCur=newNode;
-              revl1=revl1.next;
+            
 
         }
-        while(revl2!=null){
-           int sum=carry+revl2.val;
-           if(sum>=10){
-                carry=1;
-            }else{
-                carry=0;
-            }
-            sum=sum%10;
-             ListNode newNode=new ListNode(sum);
-              rCur.next=newNode;
-              rCur=newNode;
-              revl2=revl2.next;
 
-        }
         if(carry>0){
-             ListNode newNode=new ListNode(1);
-              rCur.next=newNode;
-              rCur=newNode;
+               ListNode newNode=new ListNode(carry);
+            if(cur==null){
+                cur=newNode;
+                head=newNode;
+            }else{
+                cur.next=newNode;
+                cur=newNode;
+            }
         }
 
-        return result;
+
+        return head;
+
     }
 }
