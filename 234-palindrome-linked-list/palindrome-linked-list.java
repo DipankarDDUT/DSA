@@ -9,42 +9,53 @@
  * }
  */
 class Solution {
-     public ListNode reverseList(ListNode head){
+    /** 
+        returns the head of the reverse list thatis lastNode
+    */
+    public ListNode reverseList(ListNode head) {
 
-        ListNode cur=head;
-        ListNode prev=null;
-        while(cur!=null){
-            ListNode next=cur.next;
-            cur.next=prev;
-            prev=cur;
-            cur=next;
+        ListNode slow = head;
+
+        ListNode prevNode = null;
+
+        while (slow != null) {
+            ListNode nextNode = slow.next;
+            slow.next = prevNode;
+            prevNode = slow;
+            slow = nextNode;
         }
-        return prev;
+
+        return prevNode;
+
     }
+
     public boolean isPalindrome(ListNode head) {
-        
-        if(head==null||head.next==null){
+
+        if (head == null || head.next == null) {
             return true;
         }
-        ListNode fast=head;
-        ListNode slow=head;
-        while(fast.next!=null && fast.next.next!=null){
-            fast=fast.next.next;
-            slow=slow.next;
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        ListNode rList=reverseList(slow.next);
-        ListNode temp=head;    
-        while(rList!=null && temp!=null ){
-            if(rList.val!=temp.val){
+        // slow will reach exactly middle incase of odd and even second middle we want there so correct
+
+        ListNode lastNode = reverseList(slow);
+        slow = head;
+        while (slow != null && lastNode != null) {
+
+            if (slow.val != lastNode.val) {
                 return false;
             }
-            temp=temp.next;
-            rList=rList.next;
+            slow = slow.next;
+            lastNode = lastNode.next;
         }
 
         return true;
-
 
     }
 }
