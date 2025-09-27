@@ -31,6 +31,11 @@ class Solution {
 
     public boolean isPalindrome(ListNode head) {
 
+        // brtue will be using stack first traversal 
+        // store all the elements in stack 
+        // next iteration lastnode will be compared with
+        // firstNode
+
         if (head == null || head.next == null) {
             return true;
         }
@@ -44,8 +49,11 @@ class Solution {
 
         // slow will reach exactly middle incase of odd and even second middle we want there so correct
 
+
+
         ListNode lastNode = reverseList(slow);
         slow = head;
+        // (slow and lastNode) in parallel, the extra middle node in odd length lists won’t cause a mismatch.
         while (slow != null && lastNode != null) {
 
             if (slow.val != lastNode.val) {
