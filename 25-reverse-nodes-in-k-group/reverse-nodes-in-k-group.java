@@ -22,6 +22,10 @@ class Solution {
             len++;
             curNode = curNode.next;
         }
+        // if equal it will same list
+        if(len<k){
+            return head;
+        }
         curNode = head.next;
         ListNode groupPrevNodeOfHead = head;
 
