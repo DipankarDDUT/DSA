@@ -42,17 +42,21 @@ class Solution {
             preComp[i] = 1;
         }
 
+        // as said earlier one divisor must be smaller than root n so marking we doing here only so 
+        for (int i = 2; i * i < n; i++) {
+            if (preComp[i] == 1) {
+                // no make all 0
+                for (int k = i * i; k < n; k += i)
+                    preComp[k] = 0;
+            }
+
+        }
         for (int i = 2; i < n; i++) {
             if (preComp[i] == 1) {
                 no_of_primes++;
-                // no make all 0
-                int k = 2;
-                while (k * i < n) {
-                    preComp[k * i] = 0;
-                    k++;
-                }
             }
         }
+
         return no_of_primes;
 
     }
