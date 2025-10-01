@@ -36,23 +36,23 @@ class Solution {
         // 0 based index from 0 to suppose n =30 then 0 to 29
         // we need 2 from 29
         // array is 0 to 29 
-        int[] preComp = new int[n];
+        boolean[] preComp = new boolean[n];
         // fill the array from2 to n-1 all 1
         for (int i = 2; i < n; i++) {
-            preComp[i] = 1;
+            preComp[i] = true;
         }
 
         // as said earlier one divisor must be smaller than root n so marking we doing here only so 
         for (int i = 2; i * i < n; i++) {
-            if (preComp[i] == 1) {
+            if (preComp[i]) {
                 // no make all 0
                 for (int k = i * i; k < n; k += i)
-                    preComp[k] = 0;
+                    preComp[k] = false;
             }
 
         }
         for (int i = 2; i < n; i++) {
-            if (preComp[i] == 1) {
+            if (preComp[i]) {
                 no_of_primes++;
             }
         }
