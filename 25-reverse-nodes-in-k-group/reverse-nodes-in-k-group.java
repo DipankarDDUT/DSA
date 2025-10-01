@@ -11,7 +11,7 @@
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         // if one element or no , return the head
-        if (head == null || head.next == null)
+        if (head == null || head.next == null||k==1)
             return head;
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
