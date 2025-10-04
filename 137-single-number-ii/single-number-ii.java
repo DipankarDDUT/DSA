@@ -1,23 +1,19 @@
 class Solution {
-    public int singleNumber(int[] nums) {
-        
-        // Brute sort the array then use two pointer approach check 
-       if(nums.length==0) return -1;
-         Arrays.sort(nums);
-        int i=0;
-        while(i<nums.length-2){
-            // check in group of 3
-            if(nums[i]!=nums[i+1] && nums[i]!=nums[i+2]){
-                return nums[i];
-            }else{
-                i=i+3;
-            }
-        }
+  public int singleNumber(int[] nums) {
+    if (nums.length == 0) return -1;
+    // concepts of bucket
+    int ones = 0; // all number appearing once
+    int twos = 0; // all number appearing twice
 
-        // if number in rightmost 
-        if(i<nums.length) return nums[nums.length-1];
-
-        return -1;
-
+    for (int i = 0; i < nums.length; i++) {
+      // suppose two as 1 01 then again 1 came
+      // one has 1 2 3 now again 1 came it will remove 1 from 1
+      ones = (ones ^ nums[i]) & ~twos;
+      // negation is to not to push to one if already
+      // exist in ones
+      twos = (twos ^ nums[i]) & ~ones;
     }
+
+    return ones;
+  }
 }
