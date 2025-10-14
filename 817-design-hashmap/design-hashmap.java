@@ -1,39 +1,60 @@
+class Pair {
+    int key;
+    int value;
+
+    Pair(int key,int value){
+        this.key=key;
+        this.value=value;
+    }
+}
+
 class MyHashMap {
-    ArrayList<Integer> keys;
-    ArrayList<Integer> values;
+    private static final int BUCKET_SIZE = 1000;
+    // chain(array) of bucket each bucket has linkedlist 
+    private LinkedList<Pair>[] buckets;  // array of type linked list<Pair> 
 
     public MyHashMap() {
-        keys = new ArrayList<>();
-        values = new ArrayList<>();
+        buckets=new LinkedList[BUCKET_SIZE];
+        for(int i=0;i<BUCKET_SIZE;i++){
+            buckets[i]=new LinkedList<>();
+        }
+    }
+
+    public Pair existPair(int key){
+        // get the index 
+        LinkedList<Pair> temp=buckets[key%BUCKET_SIZE];
+        // for that particular chain
+        for(Pair pair:temp){
+            if(pair.key==key){
+                return pair;
+            }
+        }
+        return null;
     }
 
     public void put(int key, int value) {
-        int index = keys.indexOf(key);
-        if (index == -1) {
-            keys.add(key);
-            values.add(value);
-        } else {
-            // add adds it , set replace the exisitng index with this new value
-            values.set(index, value);
+        Pair pair=existPair(key);
+        if(pair!=null){
+            pair.value=value;
+        }else{
+            Pair newPair=new Pair(key,value);
+            buckets[key%BUCKET_SIZE].add(newPair);
         }
-
     }
 
     public int get(int key) {
-        // require last index 
-        int index = keys.indexOf(key);
-        if (index == -1)
-            return -1;
-        return values.get(index);
+        Pair pair=existPair(key);
+        if(pair!=null){
+            return pair.value;
+        }
+        return -1;
     }
 
     public void remove(int key) {
-
-        int index = keys.indexOf(key);
-        if (index != -1) {
-            keys.remove(index);
-            values.remove(index);
-        }
+        
+        Pair pair=existPair(key);
+        // key exist simply remove 
+        buckets[key%BUCKET_SIZE].remove(pair);
 
     }
 }
