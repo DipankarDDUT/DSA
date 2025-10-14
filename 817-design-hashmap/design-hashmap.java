@@ -8,8 +8,15 @@ class MyHashMap {
     }
 
     public void put(int key, int value) {
-        keys.add(key);
-        values.add(value);
+        int index = keys.indexOf(key);
+        if (index == -1) {
+            keys.add(key);
+            values.add(value);
+        } else {
+            // add adds it , set replace the exisitng index with this new value
+            values.set(index, value);
+        }
+
     }
 
     public int get(int key) {
@@ -21,13 +28,11 @@ class MyHashMap {
     }
 
     public void remove(int key) {
-        // loop over and remove all ocurrance of key
 
         int index = keys.indexOf(key);
-        while (index != -1) {
+        if (index != -1) {
             keys.remove(index);
             values.remove(index);
-            index = keys.indexOf(key);
         }
 
     }
