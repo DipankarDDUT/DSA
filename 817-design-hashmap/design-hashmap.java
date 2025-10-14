@@ -21,7 +21,7 @@ class MyHashMap {
 
     public int get(int key) {
         // require last index 
-        int index = keys.lastIndexOf(key);
+        int index = keys.indexOf(key);
         if (index == -1)
             return -1;
         return values.get(index);
