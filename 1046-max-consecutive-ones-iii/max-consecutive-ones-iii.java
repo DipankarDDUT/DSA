@@ -1,58 +1,35 @@
 class Solution {
-    public int countConsecutiveOnes(int[] nums){
-        int maxLength=0;
-        int max=0;
-        for(int num:nums){
-            if(num==1){
-                max++;
-            }else{
-                maxLength=getMaxLength(maxLength,max);
-                max=0;
-
-            }
-        }
-        // it might hapen after 1100 11111111111111111111111 there was no last 0 encountered to calculate max >maxLength
-        return max>maxLength?max:maxLength;
-    }
-    public int getMaxLength(int max1, int max2){
-        return max1>max2?max1:max2;
-    }
     public int longestOnes(int[] nums, int k) {
+        
+    int flip = k;
+    // last 1 after flip ends we have to keep track
+    // as flip ends then from that index again counting will start
+    int left = 0;
+    int right = 0;
+    int n = nums.length;
+    int max_len = 0;
+    while (right < n) {
+      if (nums[right] == 0) {
+        if (flip > 0) {
+          flip--;
+          right++;
+        } else {
+          // no flip
+          // no flip left: move left until we release a flipped zero
+          if (nums[left] == 0) {
+            flip++;
+          }
+          left++;
 
-        if(nums.length==0){
-            return 0;
+    
         }
-          if(k==0){
-            return countConsecutiveOnes(nums);
-         }
-        int maxLength=0;
-        int zeroes_count=0;
-        int low=0;
-        int high=0;
-        while(high<nums.length){
-            if(nums[high]==0){
-                zeroes_count++;
-                if(zeroes_count>k){
-                    //shrink the window until zeroes_count is equal to k that max flip is allowed
+      } else {
+        right++;
+      }
+      // right is exclusive so curren window is right -left 
+      max_len = Math.max(max_len, right - left);
+    }
 
-                    while(zeroes_count>k && low<nums.length){
-                        if(nums[low]==0){
-                            zeroes_count--;
-                        }
-                        low++;
-
-                    }
-                }
-               
-            }
-
-                maxLength=getMaxLength(maxLength,high-low+1);
-                high++;
-
-            }
-
-     
-
-        return maxLength;
+    return max_len;
     }
 }
