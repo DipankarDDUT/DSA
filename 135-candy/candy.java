@@ -1,51 +1,36 @@
 class Solution {
     public int candy(int[] ratings) {
-        // your code goes here
-        int left[] = new int[ratings.length];
-        int right[] = new int[ratings.length];
-        Arrays.fill(left, 1);
-        Arrays.fill(right, 1);
         if (ratings.length == 0)
             return 0;
         if (ratings.length == 1)
             return 1;
-        // will do pass then take max of both 
 
-        // Left Pass
-        // skip the first index 
-        for (int i = 1; i < ratings.length ; i++) {
+            // initial value
+        int up = 0;
+        int down = 0;
+        int total = 1; // first already counted 
+        int peak=0;
+     
+        for (int i = 1; i < ratings.length; i++) {
             // if equal no change in value of array 
             if (ratings[i] > ratings[i-1]) {
-                // either bigger than left or right +1 of last count
-                left[i] = left[i-1] + 1;
+                up++;
+                down=0;
+                peak=up;
+                total+=up+1;  // as up start from 0 first time up++ its 1 as bigger than previous so up +1 that is 2 for 2nd index if bigger than 1st index 
+            }else if(ratings[i]==ratings[i-1]){
+                up=0;
+                down=0;
+                peak=0;
+                total+=1;
+            }else{
+                down++;
+                up=0;
+                total+=down;
+                if(down>peak){ total+=1;} // bumping peak by 1
             }
         }
- for (int i = 0; i < ratings.length ; i++) {
-    System.out.print(left[i]+"\t");
- }
-    System.out.println();
-
-        // right to left pass
-        // last index can be skipped 
-        for (int i = ratings.length - 2; i >= 0; i--) {
-            // if equal no change in value of array 
-            if (ratings[i] > ratings[i+1]) {
-                // either bigger than left or right +1 of last count
-                right[i] = right[i+1] + 1;
-            }
-        }
-
-        for (int i = 0; i < ratings.length ; i++) {
-    System.out.print(right[i]+"\t");
- }
-    System.out.println();
-
-        int sum = 0;
-        // max among both 
-        for (int i = ratings.length - 1; i >= 0; i--) {
-            sum = Math.max(right[i], left[i]) + sum;
-        }
-
-        return sum;
+     
+        return total;
     }
 }
