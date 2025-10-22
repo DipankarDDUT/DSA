@@ -1,72 +1,58 @@
 class MyCircularQueue {
 
     int[] queue;
-    int head;
-    int tail;
-    int size;
+    int front = -1;
+    int rear = -1;
+    int size=0;
 
     public MyCircularQueue(int k) {
-        queue=new int[k];
-        head=-1;
-        tail=-1;
-        size=0;
+        queue = new int[k];
     }
-    
+
     public boolean enQueue(int value) {
-        if(isFull()){
+        if (isFull()) {
             return false;
-        }
-        if(tail==-1  && head==-1){
-            head=0;
-            tail=0;
-            queue[tail]=value;
-        }else{
-            tail=(tail+1)%queue.length;
-            queue[tail]=value;
         }
         size++;
-
+        if (front == -1 && rear == -1) {
+            front=0;
+        }
+         rear=(rear+1)%queue.length;
+        queue[rear] = value;
         return true;
+
     }
-    
+
     public boolean deQueue() {
-        if(isEmpty()){
+        if (isEmpty())
             return false;
-        }
-        if (head == tail) {
-            head = -1;
-            tail = -1;
-            size=0;
-            return true;
-        }
-        head=(head+1)%queue.length;
+        int deQueueValue = queue[front];
+        front=(front+1)%queue.length;
         size--;
         return true;
+
     }
-    
+
     public int Front() {
-        if(size==0){
+        if (isEmpty())
             return -1;
-        }
-        return queue[head];
+        return queue[front];
     }
-    
+
     public int Rear() {
-        if(size==0){
+        if (isEmpty())
             return -1;
-        }
-        return queue[tail];
+        return queue[rear];
     }
-    
+
     public boolean isEmpty() {
-        if(size==0){
+        if (size==0)
             return true;
-        }
         return false;
     }
-    
+
     public boolean isFull() {
-        if(size==queue.length){
+        if (size==queue.length) {
             return true;
         }
 
