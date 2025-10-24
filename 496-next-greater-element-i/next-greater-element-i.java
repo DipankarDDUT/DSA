@@ -3,34 +3,32 @@ class Solution {
         // nums1 subset of nums2
 
         int[] result = new int[nums1.length];
+        Stack<Integer> stack = new Stack<>();
         if (nums1.length > nums2.length)
             return result;
         // nums2 put in hashmap to get he index
-        // number index
+        // number , larger number to right || -1
         HashMap<Integer, Integer> preMap = new HashMap<>();
-        for (int i = 0; i < nums2.length; i++) {
-            preMap.put(nums2[i], i);
-        }
-
-        // Brute
-        for (int i = 0; i < nums1.length; i++) {
-            // for each element in nums1 check in larger set 
-            int max = -1;
-            // get the index in nums2 then start from next item
-            int index = preMap.get(nums1[i]);
-            int num = nums1[i];
-
-            for (int j = index + 1; j < nums2.length; j++) {
-                if (num < nums2[j]) {
-                    max = nums2[j]; // got the next max
-                    break;
-                }
-
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            int num = nums2[i];
+            // keep on popping until larger element found
+            while (!stack.isEmpty() && stack.peek() <= num) {
+                stack.pop();
             }
-            result[i] = max;
+            if (stack.isEmpty()) {
+                //number and larger to the right
+                preMap.put(num, -1);
 
+            } else {
+                preMap.put(num, stack.peek());
+            }
+            stack.push(num);
         }
 
+        for (int i = 0; i < nums1.length; i++) {
+            // pass the number to get the larger to the right 
+            result[i] = preMap.getOrDefault(nums1[i], -1);
+        }
         return result;
 
     }
