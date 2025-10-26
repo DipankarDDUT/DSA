@@ -14,11 +14,7 @@ class Solution {
             while (alive && !stack.isEmpty()) {
 
                 // both left both right and stack top left and cur Right no issue
-                if (curNum >= 0 && stack.peek() >= 0 || curNum < 0 && stack.peek() < 0
-                        || stack.peek() < 0 && curNum >= 0) {
-                    stack.push(curNum);
-                    alive = false;
-                } else {
+             if(stack.peek()>=0 && curNum<0) {
                     // collision
                     if (stack.peek() == Math.abs(curNum)){
                         //equal both destory no need 
@@ -38,6 +34,10 @@ class Solution {
                         }
                     }
 
+                }else{
+                    
+                    stack.push(curNum);
+                    alive = false;
                 }
             }
         }
