@@ -1,42 +1,51 @@
 class Solution {
     public int[] asteroidCollision(int[] asteroids) {
-          Stack<Integer> st=new Stack<>();
-        if(asteroids.length==0){
-            return new int[0];
-        }
-        if(asteroids.length==1){
-            return new int[]{asteroids[0]};
-        }
 
-        for(int asteroid : asteroids){
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < asteroids.length; i++) {
+            // if same direction simply  push
+            int curNum = asteroids[i];
+            boolean alive = true;
+            if (stack.isEmpty()) {
+                stack.push(curNum);
+                // push and next iteration
+                continue;
+            }
+            while (alive && !stack.isEmpty()) {
 
-            if(asteroid>0){
-                // moving to the right always push 
-                st.push(asteroid);
-            }else{
-                // new one coming moving to the left
-                while(!st.isEmpty() && st.peek()>0 && Math.abs(asteroid)>st.peek()){
-                    // destroy all smaller moving to the right
-                    st.pop();
+                // both left both right and stack top left and cur Right no issue
+                if (curNum >= 0 && stack.peek() >= 0 || curNum < 0 && stack.peek() < 0
+                        || stack.peek() < 0 && curNum >= 0) {
+                    stack.push(curNum);
+                    alive = false;
+                } else {
+                    // collision
+                    if (stack.peek() == Math.abs(curNum)){
+                        //equal both destory no need 
+                        stack.pop();
+                        alive=false;
+                    } 
+                    else if(stack.peek() > Math.abs(curNum)) {
+                        //  top is bigger curNum destroyed 
+                        alive = false;
+                    } else {
+                        // curNum abs is bigger then top 
+                        stack.pop();
+                        if (stack.isEmpty()) {
+                            // means curNum bigger than all 
+                            stack.push(curNum);
+                            alive = false;
+                        }
+                    }
+
                 }
-                // all smaller destroyed , now will check for equal and opp
-               if(!st.isEmpty() && st.peek()>0 && Math.abs(asteroid)==st.peek()){
-                    st.pop();
-
-               }else if(st.isEmpty()||st.peek()<0){
-                // either empty or top one moving to the left same direction 
-                st.push(asteroid);
-               }
             }
         }
-          
+        int[] result = new int[stack.size()];
+        for (int i = result.length - 1; i >= 0; i--) {
+            result[i] = stack.pop();
 
-        int[] result=new int[st.size()];
-         int i=st.size()-1;
-         while(i>=0){
-            result[i]=st.pop();
-            i--;
-         }
-         return result;
+        }
+        return result;
     }
 }
