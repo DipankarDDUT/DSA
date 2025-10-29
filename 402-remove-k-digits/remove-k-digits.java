@@ -15,10 +15,8 @@ class Solution {
                 stack.pop();
                 k--;
             }
-            // not to push the leading 0s as leading is non zero 
-            if(!(c=='0' && stack.isEmpty())){
+            // leading 0 will be handled later 
               stack.push(c);
-            }
        }
 
        // k is still > 0 
@@ -36,13 +34,15 @@ class Solution {
 
        sb=sb.reverse();
        // remove all leading zeroes
-       for(int i=0;i<sb.length();i++){
+       int i=0;
+       while(i<sb.length()){
             char c=sb.charAt(i);
             if(c!='0'){
                 // means first non zero found break;
                 break;
             }
-            // remve leading zeroes
+            // i will not be incremented as 00
+            // then 1srt deletion again next 0 first index 
             sb.deleteCharAt(i);
        }
 
