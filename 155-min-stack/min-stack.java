@@ -1,51 +1,64 @@
 class MinStack {
-    List<Integer> stack;
-    List<Integer> minStack;
-    public MinStack() {
-        stack=new ArrayList<>();
-        minStack=new ArrayList<>();
 
-    }
-    
-    public void push(int val) {
-       stack.add(val);
-       if(minStack.isEmpty()||minStack.get(minStack.size()-1)>=val){
-        minStack.add(val);
-       }
+  //Formula 2 * val - previousMinimum=new_Val 
+  // top =>min no modified value
+  // top<min modified value use formula always return the minimum 
+  // 2 * val - newVal(which is in top)= previousMinimim
+  // 
+  Stack<Long> stack;
+  long min;
 
-    }
-    
-    public void pop() {
-         if(stack.isEmpty()){
-            return;
-        }
-        int top=stack.remove(stack.size()-1);
-        if(top== minStack.get(minStack.size()-1)){
-          minStack.remove(minStack.size()-1);
-        }
+  public MinStack() {
+    stack = new Stack<>();
+  }
 
+  public void push(int val) {
+    if (stack.isEmpty()) {
+      stack.push((long)val);
+      min=val;
+      return;
     }
-    
-    public int top() {
-         if(stack.isEmpty()){
-            return -1;
-        }
-        return stack.get(stack.size()-1);
+    if(min<=val){
+      // simply push the element
+       stack.push((long)val);
+    }else{
+      // get the new value
+      long new_value=(2L * val) - min;
+      min=val;
+      stack.push(new_value);
     }
-    
-    public int getMin() {
-        if(minStack.isEmpty()){
-            return -1;
-        }
-        return minStack.get(minStack.size()-1);
+  }
+
+  public void pop() {
+    if (!stack.isEmpty()) {
+      long x=stack.pop();
+      // now we will see x was modified value or not
+      // as we dont know whether minimum was removed 
+      if(x<min){
+        // min larger means x was modified we need to get the 
+        // previous minimum
+        min=2L * min - x;
+      }
     }
+  }
+
+  public int top() {
+    if (!stack.isEmpty()){
+      if(stack.peek()>=min){
+        // exact number was pushed 
+        long temp=stack.peek();
+        return (int)temp;
+      }else{
+        return (int)min;
+      }
+    } 
+    return -1;
+  }
+
+  public int getMin() {
+    if (!stack.isEmpty()) {
+      return (int)min;
+    }
+    return -1;
+  }
 }
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(val);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
- */
