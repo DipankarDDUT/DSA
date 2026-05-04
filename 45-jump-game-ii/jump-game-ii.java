@@ -8,6 +8,10 @@ class Solution {
         // traverse till second last index
         for (int i = 0; i < nums.length - 1 && currentEnd < nums.length - 1; i++) {
             
+            // when reaching to end is not guranteed 
+            if(i>furthest) return 0;
+
+
             // update the furthest index reachable within current jump range
             furthest = Math.max(nums[i] + i, furthest);
 
